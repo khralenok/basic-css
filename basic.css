@@ -1,0 +1,267 @@
+:root {
+  /* You can add as many mid-tones as you want */
+  --color-lightest: #ffffff;
+  --color-mid: #c4c4c4;
+  --color-darkest: #151419;
+  --color-accent: #5078f5;
+  --container-width: 80em; /* This parameter should be equal smallest width of the media query you working with */
+  --base-font-size: 16px;
+  --font-scale-ratio: 1.25;
+  --spacing-scale-ratio: 2;
+  --paragraph-font-size: 1.25rem; /* You setting up only this variable, the rest font-sizes will update automatically */
+  --spacing-siblings: 1rem; /* This parameter you'll change from media query to media query, the rest spacings should be calculated automatically */
+  --spacing-friends: calc(
+    (var(--spacing-siblings) * pow(var(--spacing-scale-ratio), 1))
+  );
+  --spacing-housemates: calc(
+    (var(--spacing-siblings) * pow(var(--spacing-scale-ratio), 2))
+  );
+  --spacing-townmates: calc(
+    (var(--spacing-siblings) * pow(var(--spacing-scale-ratio), 3))
+  );
+
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-darkest);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  width: 100%;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--color-lightest);
+  font-size: var(--base-font-size);
+}
+
+h1,
+h2,
+h3,
+label,
+.logo {
+  font-weight: 600;
+  line-height: 125%;
+  letter-spacing: calc(var(--paragraph-font-size) * 0.03);
+}
+
+h1 {
+  font-size: calc(var(--paragraph-font-size) * pow(var(--font-scale-ratio), 3));
+}
+
+h2 {
+  font-size: calc(var(--paragraph-font-size) * pow(var(--font-scale-ratio), 2));
+}
+
+h3,
+.logo {
+  font-size: calc(var(--paragraph-font-size) * pow(var(--font-scale-ratio), 1));
+}
+
+a,
+p,
+button,
+li,
+label {
+  font-size: var(--paragraph-font-size);
+  letter-spacing: calc(var(--paragraph-font-size) * 0.025);
+  line-height: 135%;
+}
+
+input {
+  font-size: calc(var(--paragraph-font-size) * 0.8);
+  line-height: 135%;
+}
+
+a:link,
+button {
+  transition: transform 500ms;
+}
+a:link:hover,
+button:hover {
+  transform: scale(1.05);
+}
+
+span.secondary {
+  color: var(--gray700);
+}
+
+.no-scroll {
+  height: 100%;
+  overflow: hidden;
+}
+
+section {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  padding: var(--spacing-townmates) 0;
+  justify-content: center;
+}
+/* Role of the container is grouping content inside the section  */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: var(--container-width);
+  gap: var(--spacing-housemates);
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-siblings) var(--spacing-friends);
+}
+
+header ul {
+  display: flex;
+  gap: var(--spacing-siblings);
+  list-style: none;
+}
+
+header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-housemates) var(--spacing-friends);
+  background-color: var(--color-mid);
+  color: var(--color-darkest);
+}
+
+/* Role of the component depends on it, so this element need to group elements inside container that have common functionality. i.e Slider, gallery, carousel, accordion, etc. */
+.component {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--spacing-friends);
+  width: 100%;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Card role is grouping self-contained items that are in the same group. For example - photos in gallery, price plans, reviews, etc.  */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  text-decoration: none;
+  gap: var(--spacing-friends);
+  padding: var(--spacing-friends);
+  border-radius: var(--spacing-friends);
+  border: 1px solid var(--color-mid);
+}
+
+/* Role of the banner is highlighting the fact that component is self-contained. This element simillar to card, but fits more for forms, banners and the rest nested elements that are not directly part of the page flow */
+.banner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-friends);
+  padding: var(--spacing-friends);
+  border-radius: var(--spacing-friends);
+  border: 1px solid var(--color-mid);
+}
+
+.title {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-friends);
+  width: 80%;
+}
+
+.title.left {
+  align-items: start;
+  text-align: left;
+  width: 100%;
+}
+
+.highlight {
+  color: var(--color-mid800);
+}
+
+button,
+.button {
+  font-weight: 600;
+  color: var(--color-lightest);
+  text-decoration: none;
+  background: var(--color-darkest);
+  border: 0px;
+  border-radius: calc(var(--spacing-siblings) / 2);
+  padding: var(--spacing-siblings) calc(var(--spacing-siblings) * 3);
+}
+
+/* Role of wrapper is creating a block inside the component that are taking same height as an image or video. In most of the cases it works almost like molecule, but elements inside it are friens, not siblings*/
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--spacing-friends);
+}
+
+/* Role of the molecule is grouping siblings elements */
+.molecule {
+  display: flex;
+  gap: var(--spacing-siblings);
+}
+/* Vertical molecule is grouping siblings elements but in column*/
+.molecule.vertical {
+  flex-direction: column;
+}
+/* Liquid molecule is grouping siblings elements but automatically distribute them to oposite sides of the row*/
+.molecule.liquid {
+  justify-content: space-between;
+  width: 100%;
+}
+
+@media screen and (max-width: 1280px) {
+  :root {
+    --paragraph-font-size: 1rem;
+    --spacing-siblings: 0.75rem;
+    --container-width: 60em;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  :root {
+    --container-width: 40em;
+  }
+  .container.post {
+    width: var(--container-width);
+  }
+  .component {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  :root {
+    --paragraph-font-size: 0.875rem;
+    --spacing-siblings: 0.5rem;
+    --container-width: 30em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    --container-width: 20em;
+  }
+  .component {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
